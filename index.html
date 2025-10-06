@@ -23,6 +23,11 @@
             --transition: all 0.3s ease;
         }
 
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+        }
+
         body {
             background-color: #f5f5f5;
             color: var(--dark-color);
@@ -43,6 +48,7 @@
             z-index: 1000;
             transform: translateY(-100%);
             animation: slideDown 0.8s ease forwards;
+            width: 100%;
         }
 
         .logo-container {
@@ -190,12 +196,14 @@
             padding: 0 20px;
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
 
         .hero-content {
             transform: translateY(50px);
             opacity: 0;
             animation: fadeUp 1s ease 0.5s forwards;
+            max-width: 100%;
         }
 
         .hero-content h1 {
@@ -290,6 +298,7 @@
         .about-us {
             background-color: white;
             padding: 80px 5%;
+            width: 100%;
         }
 
         .about-container {
@@ -363,6 +372,7 @@
         .section {
             padding: 80px 5%;
             text-align: center;
+            width: 100%;
         }
 
         .section-title {
@@ -537,7 +547,7 @@
             border-bottom: none;
         }
 
-        /* Hotels Section */
+        /* Hotels Section - IMPROVED */
         .hotels {
             background-color: white;
         }
@@ -560,6 +570,8 @@
             transition: var(--transition);
             transform: translateY(50px);
             opacity: 0;
+            display: flex;
+            flex-direction: column;
         }
 
         .hotel-card.animated {
@@ -581,6 +593,9 @@
         .hotel-info {
             padding: 25px;
             text-align: right;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .hotel-info h3 {
@@ -592,13 +607,15 @@
         .hotel-details {
             text-align: right;
             margin: 15px 0;
+            flex: 1;
         }
 
         .hotel-detail {
             display: flex;
-            align-items: center;
-            margin-bottom: 8px;
+            align-items: flex-start;
+            margin-bottom: 12px;
             font-size: 15px;
+            line-height: 1.5;
         }
 
         .hotel-detail i {
@@ -606,6 +623,12 @@
             color: var(--primary-color);
             width: 20px;
             text-align: center;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .hotel-detail span {
+            flex: 1;
         }
 
         /* Buses Section */
@@ -796,6 +819,7 @@
             color: white;
             padding: 50px 5% 20px;
             text-align: center;
+            width: 100%;
         }
 
         .footer-content {
@@ -1062,10 +1086,10 @@
         <div class="hero-content">
             <h1>
                 <div class="hero-text-container">
-                    <div class="hero-text active">رحلات عمرة وزيارة لا تنسى</div>
-                    <div class="hero-text">خدمات متكاملة للعمرة</div>
-                    <div class="hero-text">أفضل العروض والخدمات </div>
-                    <div class="hero-text">رحلات ميسرة </div>
+                    <div class="hero-text active">رحلات عمرة وزيارة لا تنسى مع الهلال</div>
+                    <div class="hero-text">خدمات متكاملة للعمرة والزيارة</div>
+                    <div class="hero-text">أفضل العروض والخدمات المميزة</div>
+                    <div class="hero-text">رحلات ميسرة بأسعار تنافسية</div>
                 </div>
             </h1>
             <p>نقدم لك أفضل خدمات العمرة والزيارة مع باقات متنوعة تناسب جميع الميزانيات. استمتع بتجربة فريدة مع فريقنا المحترف.</p>
@@ -1094,7 +1118,7 @@
             </div>
             <div class="video-container">
                 <video autoplay muted loop>
-                    <source src="images/about.mp4" type="video/mp4">
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-pilgrims-performing-tawaf-around-the-kaaba-43305-large.mp4" type="video/mp4">
                     متصفحك لا يدعم تشغيل الفيديو
                 </video>
             </div>
@@ -1209,7 +1233,7 @@
         </div>
     </section>
 
-    <!-- Hotels Section -->
+    <!-- Hotels Section - IMPROVED -->
     <section class="section hotels" id="hotels">
         <h2 class="section-title">فنادقنا الشريكة</h2>
         <div class="hotel-cards">
@@ -1220,22 +1244,28 @@
                     <h3>فوكو مكة (إيه آي جيه هوتيل)</h3>
                     <div class="hotel-details">
                         <div class="hotel-detail">
+                            <i class="fas fa-map-marker-alt"></i>
                             <span>1,500 متر من الحرم - شارع إبراهيم الخليل، مكة المكرمة</span>
                         </div>
                         <div class="hotel-detail">
-                            <span>5 نجوم</span>
+                            <i class="fas fa-star"></i>
+                            <span>5 نجوم - فندق فاخر</span>
                         </div>
                         <div class="hotel-detail">
-                            <span>واي فاي مجاني</span>
+                            <i class="fas fa-wifi"></i>
+                            <span>واي فاي مجاني في جميع أنحاء الفندق</span>
                         </div>
                         <div class="hotel-detail">
-                            <span>خدمة نقل مجانية إلى الحرم</span>
+                            <i class="fas fa-bus"></i>
+                            <span>خدمة نقل مجانية إلى الحرم المكي</span>
                         </div>
                         <div class="hotel-detail">
-                            <span>خدمة كونسييرج</span>
+                            <i class="fas fa-concierge-bell"></i>
+                            <span>خدمة كونسييرج على مدار 24 ساعة</span>
                         </div>
                         <div class="hotel-detail">
-                            <span>صراف آلي</span>
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>صراف آلي في الموقع</span>
                         </div>
                     </div>
                     <div class="contact-buttons">
@@ -1256,22 +1286,28 @@
                     <h3>إم هوتل مكة باي ميلينيوم</h3>
                     <div class="hotel-details">
                         <div class="hotel-detail">
+                            <i class="fas fa-map-marker-alt"></i>
                             <span>2,710 متر من الحرم - شارع إبراهيم الخليل، مكة المكرمة</span>
                         </div>
                         <div class="hotel-detail">
-                            <span>5 نجوم</span>
+                            <i class="fas fa-star"></i>
+                            <span>5 نجوم - خدمة فندقية راقية</span>
                         </div>
                         <div class="hotel-detail">
-                            <span>واي فاي مجاني</span>
+                            <i class="fas fa-wifi"></i>
+                            <span>واي فاي مجاني عالي السرعة</span>
                         </div>
                         <div class="hotel-detail">
-                            <span>خدمة نقل مجانية إلى الحرم</span>
+                            <i class="fas fa-bus"></i>
+                            <span>خدمة نقل مجانية منتظمة إلى الحرم</span>
                         </div>
                         <div class="hotel-detail">
-                            <span>مركز للياقة البدنية</span>
+                            <i class="fas fa-dumbbell"></i>
+                            <span>مركز للياقة البدنية مجهز بالكامل</span>
                         </div>
                         <div class="hotel-detail">
-                            <span>مكتب استقبال 24 ساعة</span>
+                            <i class="fas fa-clock"></i>
+                            <span>مكتب استقبال يعمل على مدار 24 ساعة</span>
                         </div>
                     </div>
                     <div class="contact-buttons">
@@ -1292,22 +1328,28 @@
                     <h3>فندق فلسطين مكة</h3>
                     <div class="hotel-details">
                         <div class="hotel-detail">
-                            <span>800 متر من الحرم - شارع إبراهيم الخليل، مكة المكرمة</span>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>800 متر من الحرم - موقع مركزي ممتاز</span>
                         </div>
                         <div class="hotel-detail">
-                            <span>3 نجوم</span>
+                            <i class="fas fa-star"></i>
+                            <span>3 نجوم - فندق اقتصادي مريح</span>
                         </div>
                         <div class="hotel-detail">
-                            <span>واي فاي مجاني</span>
+                            <i class="fas fa-wifi"></i>
+                            <span>واي فاي مجاني في المناطق العامة</span>
                         </div>
                         <div class="hotel-detail">
-                            <span>تكييف هواء</span>
+                            <i class="fas fa-wind"></i>
+                            <span>تكييف هواء مركزي في جميع الغرف</span>
                         </div>
                         <div class="hotel-detail">
-                            <span>مطعم</span>
+                            <i class="fas fa-utensils"></i>
+                            <span>مطعم يقدم وجبات متنوعة</span>
                         </div>
                         <div class="hotel-detail">
-                            <span>خدمة تنظيف يومية</span>
+                            <i class="fas fa-broom"></i>
+                            <span>خدمة تنظيف يومية للغرف</span>
                         </div>
                     </div>
                     <div class="contact-buttons">
