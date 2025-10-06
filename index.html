@@ -35,7 +35,7 @@
             overflow-x: hidden;
         }
 
-        /* Navbar Styles */
+        /* Navbar Styles - IMPROVED MOBILE MENU */
         .navbar {
             background: linear-gradient(135deg, var(--primary-color), #0a58ca);
             padding: 15px 5%;
@@ -180,12 +180,116 @@
             color: white;
             font-size: 24px;
             cursor: pointer;
+            z-index: 1001;
         }
 
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color), #0a58ca);
+            z-index: 999;
+            padding: 80px 20px 20px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .mobile-nav-links li {
+            width: 100%;
+        }
+
+        .mobile-nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: block;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .mobile-nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-5px);
+        }
+
+        .mobile-dropdown {
+            width: 100%;
+        }
+
+        .mobile-dropdown-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin-top: 5px;
+            padding: 10px;
+        }
+
+        .mobile-dropdown-content a {
+            background: transparent;
+            border: none;
+            padding: 12px 20px;
+            font-size: 14px;
+        }
+
+        .mobile-dropdown.active .mobile-dropdown-content {
+            display: block;
+        }
+
+        .mobile-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .mobile-dropdown-toggle i {
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-dropdown.active .mobile-dropdown-toggle i {
+            transform: rotate(180deg);
+        }
+
+        /* Rest of the CSS remains the same */
         /* Hero Section */
         .hero {
             height: 80vh;
-            background: linear-gradient(rgba(13, 110, 253, 0.7), rgba(13, 110, 253, 0.9)), url('https://tawaf-kaaba.site/img/66.png');
+            background: linear-gradient(rgba(13, 110, 253, 0.7), rgba(13, 110, 253, 0.9)), url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -965,6 +1069,10 @@
                 display: block;
             }
             
+            .mobile-menu {
+                display: block;
+            }
+            
             .hero-content h1 {
                 font-size: 36px;
                 height: 60px;
@@ -1012,6 +1120,7 @@
             .btn {
                 padding: 10px 20px;
                 font-size: 16px;
+                margin: 5px;
             }
             
             .section {
@@ -1047,6 +1156,11 @@
             .package-header {
                 padding: 45px 20px 20px;
             }
+            
+            .mobile-nav-links a {
+                padding: 12px 15px;
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -1081,6 +1195,30 @@
         </div>
     </nav>
 
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-close">
+            <i class="fas fa-times"></i>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="#home">الرئيسية</a></li>
+            <li><a href="#about">من نحن</a></li>
+            <li><a href="#why-choose">لماذا تختار الهلال</a></li>
+            <li><a href="#packages">الباقات</a></li>
+            <li class="mobile-dropdown">
+                <a href="#services" class="mobile-dropdown-toggle">
+                    الخدمات <i class="fas fa-chevron-down"></i>
+                </a>
+                <div class="mobile-dropdown-content">
+                    <a href="#hotels">الفنادق</a>
+                    <a href="#buses">الباصات</a>
+                </div>
+            </li>
+            <li><a href="#contact">اتصل بنا</a></li>
+        </ul>
+    </div>
+
+    <!-- Rest of the HTML remains the same -->
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
@@ -1497,12 +1635,40 @@
     </footer>
 
     <script>
-        // Simple toggle for mobile menu
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
-            document.querySelector('.nav-links').style.display = 
-                document.querySelector('.nav-links').style.display === 'flex' ? 'none' : 'flex';
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileMenuClose = document.querySelector('.mobile-menu-close');
+        const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
         });
-        
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Mobile Dropdown Toggle
+        mobileDropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.mobile-dropdown-toggle');
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            });
+        });
+
+        // Close mobile menu when clicking on links
+        const mobileLinks = document.querySelectorAll('.mobile-nav-links a[href^="#"]');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1517,11 +1683,6 @@
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
-                    
-                    // Close mobile menu after clicking a link
-                    if(window.innerWidth <= 992) {
-                        document.querySelector('.nav-links').style.display = 'none';
-                    }
                 }
             });
         });
